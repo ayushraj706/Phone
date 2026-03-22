@@ -1,7 +1,7 @@
 name: Build My Secure Phone App
 
 on:
-  workflow_dispatch: # Isse aap button daba kar build kar payenge
+  workflow_dispatch: # Isse aap manually build start kar sakte hain
 
 jobs:
   build:
@@ -21,11 +21,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleFossifyDebug
+        # Yahan 'Fossify' ki jagah 'Foss' flavor use ho raha hai
+        run: ./gradlew assembleFossDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: MySafePhoneApp
-          path: app/build/outputs/apk/fossify/debug/*.apk
+          # Path ko bhi flavor ke hisaab se update kiya gaya hai
+          path: app/build/outputs/apk/foss/debug/*.apk
           
